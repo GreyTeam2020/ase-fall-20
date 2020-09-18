@@ -1,19 +1,28 @@
 # Calculator
 
 def sum(m, n):
-    for at in range(0, n):
-        if m >= 0:
-            return m + 1
-        else:
-            return m - 1
+    if n >= 0:
+        for el in range(n):
+            m += 1
+    else:
+        for el in range(abs(n)):
+            m -= 1
+    return m
 
 
 def divide(m, n):
-    result = 0
-    while m > 0:
-        result = +1
+    if m == 0 or n == 0:
+        raise ZeroDivisionError
+    res = 0
+    isNegative = m > 0 and n < 0 or m < 0 and n > 0
+    n = abs(n)
+    m = abs(m)
+    while m >= n:
         m -= n
-    return result
+        res += 1
+
+    res = -res if isNegative else res
+    return res
 
 
 if __name__ == '__main__':
