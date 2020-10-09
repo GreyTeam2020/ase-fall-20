@@ -1,3 +1,8 @@
+"""
+4th ASE2020 lab
+
+@author Vincenzo Palazzo v.palazzo1@studenti.unipi.it
+"""
 from flask import Blueprint, jsonify
 
 teams = Blueprint('teams', __name__)
