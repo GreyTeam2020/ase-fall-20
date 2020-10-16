@@ -1,0 +1,85 @@
+==================================================================================== test session starts =====================================================================================
+platform linux -- Python 3.6.9, pytest-5.3.1, py-1.9.0, pluggy-0.13.1
+benchmark: 3.2.2 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /home/vincent/GithubUnipi/ase-fall-20/05_lab_testing/calcSkeleton
+plugins: cov-2.10.1, timeout-1.3.3, forked-1.0.2, benchmark-3.2.2, xdist-1.29.0, flaky-3.6.1
+collected 19 items                                                                                                                                                                           
+
+myservice/tests/test_calc.py F.F.                                                                                                                                                      [ 21%]
+myservice/tests/test_calculator.py ..............                                                                                                                                      [ 94%]
+myservice/tests/test_home.py .                                                                                                                                                         [100%]
+
+========================================================================================== FAILURES ==========================================================================================
+_____________________________________________________________________________________ TestCalc.test_div1 _____________________________________________________________________________________
+
+self = <test_calc.TestCalc testMethod=test_div1>
+
+    def test_div1(self):
+        tested_app = app.test_client()
+>       reply = tested_app.get('/calc/div?m=3&n=0').get_json()
+
+myservice/tests/test_calc.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.6/dist-packages/werkzeug/test.py:1006: in get
+    return self.open(*args, **kw)
+../../../../.local/lib/python3.6/site-packages/flask/testing.py:227: in open
+    follow_redirects=follow_redirects,
+/usr/local/lib/python3.6/dist-packages/werkzeug/test.py:970: in open
+    response = self.run_wsgi_app(environ.copy(), buffered=buffered)
+/usr/local/lib/python3.6/dist-packages/werkzeug/test.py:861: in run_wsgi_app
+    rv = run_wsgi_app(self.application, environ, buffered=buffered)
+/usr/local/lib/python3.6/dist-packages/werkzeug/test.py:1096: in run_wsgi_app
+    app_rv = app(environ, start_response)
+../../../../.local/lib/python3.6/site-packages/flask/app.py:2464: in __call__
+    return self.wsgi_app(environ, start_response)
+../../../../.local/lib/python3.6/site-packages/flask/app.py:2450: in wsgi_app
+    response = self.handle_exception(e)
+../../../../.local/lib/python3.6/site-packages/flask/app.py:1867: in handle_exception
+    reraise(exc_type, exc_value, tb)
+../../../../.local/lib/python3.6/site-packages/flask/_compat.py:39: in reraise
+    raise value
+../../../../.local/lib/python3.6/site-packages/flask/app.py:2447: in wsgi_app
+    response = self.full_dispatch_request()
+../../../../.local/lib/python3.6/site-packages/flask/app.py:1952: in full_dispatch_request
+    rv = self.handle_user_exception(e)
+../../../../.local/lib/python3.6/site-packages/flask/app.py:1821: in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+../../../../.local/lib/python3.6/site-packages/flask/_compat.py:39: in reraise
+    raise value
+../../../../.local/lib/python3.6/site-packages/flask/app.py:1950: in full_dispatch_request
+    rv = self.dispatch_request()
+../../../../.local/lib/python3.6/site-packages/flask/app.py:1936: in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+../../4_lab_rest/skeleton/src/flakon/flakon/blueprints.py:28: in __json
+    res = f(*args, **kw)
+myservice/views/calc.py:24: in div
+    return jsonify({'result': str(c.divide(m, n))})
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+m = 3, n = 0
+
+    def divide(m, n):
+        result = 0
+        negativeResult = m > 0 and n < 0 or m < 0 and n > 0
+        n = abs(n)
+        m = abs(m)
+    
+        if n == 0:
+>           raise ZeroDivisionError('You cannot divide by 0!')
+E           ZeroDivisionError: You cannot divide by 0!
+
+myservice/calculator/calculator.py:21: ZeroDivisionError
+_____________________________________________________________________________________ TestCalc.test_sub1 _____________________________________________________________________________________
+
+self = <test_calc.TestCalc testMethod=test_sub1>
+
+    def test_sub1(self):
+        tested_app = app.test_client()
+        reply = tested_app.get('/calc/sub?m=3&n=0').get_json()
+>       self.assertEqual(reply['result'], '3')
+E       AssertionError: '0' != '3'
+E       - 0
+E       + 3
+
+myservice/tests/test_calc.py:31: AssertionError
+================================================================================ 2 failed, 17 passed in 0.89s ================================================================================

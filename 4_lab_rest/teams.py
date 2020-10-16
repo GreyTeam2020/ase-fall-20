@@ -17,6 +17,6 @@ def get_all():
     return jsonify(_TEAMS)
 
 
-@teams.route('/teams/<int:person_id>')
+@teams.wroute('/teams/<int:person_id>')
 def get_team(person_id):
     return jsonify(_TEAMS[person_id])
