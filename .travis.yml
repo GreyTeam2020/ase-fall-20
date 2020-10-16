@@ -4,7 +4,7 @@ env:
   - TOX_ENV=py36
 install:
   - pip install tox
-  - pip install coverage
+  - pip install coverage==4.5.4
   - pip install python-coveralls
 script:
   - bash build.sh
