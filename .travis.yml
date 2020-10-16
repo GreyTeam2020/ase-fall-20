@@ -4,7 +4,10 @@ env:
   - TOX_ENV=py36
 install:
   - pip install tox
+  - pip install python-coveralls
 script:
   - bash build.sh
+after_success:
+  - coveralls
 notifications:
   email: false
