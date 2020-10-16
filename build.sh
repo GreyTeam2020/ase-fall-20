@@ -8,4 +8,3 @@ coveralls
 cd .. && cd ..
 cd 1_lab
 python -m pytest
-coveralls
